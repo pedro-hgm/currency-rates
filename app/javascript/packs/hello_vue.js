@@ -60,7 +60,7 @@ Vue.component('line-chart', LineChart);
 
 document.addEventListener('turbolinks:load', () => {
   const app = new Vue({
-    el: '#hello',
+    el: '#vue-app',
     components: { LineChart }
   });
 });
