@@ -6,6 +6,7 @@
         v-for="(currencyFullName, currencyShortName, index) of availableCurrencies"
         :key="index"
         @click="setChartData(currencyShortName, currencyFullName)"
+        :ref="currencyShortName"
       >{{currencyFullName}}</button>
     </div>
   </section>
