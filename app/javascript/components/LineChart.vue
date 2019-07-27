@@ -1,11 +1,12 @@
 <template>
   <section id="chart">
-    <div id="container-for-line-chart"></div>
+    <div ref="highcharts-container"></div>
     <div class="chart-buttons">
       <button
         v-for="(currencyFullName, currencyShortName, index) of availableCurrencies"
         :key="index"
         @click="setChartData(currencyShortName, currencyFullName)"
+        :ref="currencyShortName"
       >{{currencyFullName}}</button>
     </div>
   </section>
@@ -52,7 +53,7 @@ export default {
     },
 
     mountChart(chartValues, currencyFullName) {
-      Highcharts.chart("container-for-line-chart", {
+      Highcharts.chart(this.$refs["highcharts-container"], {
         chart: {
           type: "line"
         },
