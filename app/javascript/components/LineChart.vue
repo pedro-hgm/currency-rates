@@ -1,21 +1,30 @@
 <template>
-  <section id="chart">
-    <div ref="highcharts-container"></div>
+  <div id="chart">
+    <TheNav />
+    <div class="container">
+      <div ref="highcharts-container" class="my-chart"></div>
+    </div>
     <div class="chart-buttons">
       <button
+        class="my-button btn waves-effect waves-light"
         v-for="(currencyFullName, currencyShortName, index) of availableCurrencies"
         :key="index"
-        @click="setChartData(currencyShortName, currencyFullName)"
         :ref="currencyShortName"
-      >{{currencyFullName}}</button>
+        @click="setChartData(currencyShortName, currencyFullName)"
+      >
+        {{currencyFullName}}
+        <i class="material-icons right">timeline</i>
+      </button>
     </div>
-  </section>
+  </div>
 </template>
 
 <script>
 import Highcharts from "highcharts";
+import TheNav from "./TheNav";
 export default {
   name: "LineChart",
+  components: { TheNav },
   props: {
     rates: {
       type: Object,
@@ -55,10 +64,14 @@ export default {
     mountChart(chartValues, currencyFullName) {
       Highcharts.chart(this.$refs["highcharts-container"], {
         chart: {
-          type: "line"
+          type: "line",
+          marginLeft: 80,
+          marginRight: 60,
+          reflow: true,
+          borderRadius: 20
         },
         title: {
-          text: `<strong>Câmbio</strong> <br/> ${currencyFullName} <br/> período: uma semana`
+          text: `<strong>${currencyFullName}</strong> <br/> período: uma semana`
         },
         subtitle: {
           text: "Moeda base: Dollar"
@@ -91,9 +104,16 @@ export default {
 };
 </script>
 
-<style scoped>
+<style scoped >
 .chart-buttons {
   text-align: center;
+}
+.my-button {
+  margin: 1em;
+}
+.my-chart {
+  opacity: 0.9;
+  margin-top: 4em;
 }
 </style>
 
